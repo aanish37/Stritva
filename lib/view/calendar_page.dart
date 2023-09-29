@@ -9,10 +9,14 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
+
   var _selectedDay = DateTime.now();
   var _focusedDay = DateTime.now();
   var _calendarFormat = CalendarFormat.week;
- 
+
+  List<Event> _getEventsForDay(DateTime day) {
+    return events[day] ?? [];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +29,11 @@ class _CalendarPageState extends State<CalendarPage> {
           firstDay: DateTime.utc(2010, 10, 16),
           lastDay: DateTime.utc(2030, 3, 14),
           focusedDay: _focusedDay, // Use _focusedDay as the focused day
-          calendarFormat: _calendarFormat,
+          calendarFormat: _calendarFormat, //which format like month or week
           onPageChanged: (focusedDay) {
             _focusedDay = focusedDay;
-          },
-          
+          }, //to not change the focuse day when we reload
+
           onFormatChanged: (format) {
             setState(() {
               _calendarFormat = format;
@@ -48,7 +52,11 @@ class _CalendarPageState extends State<CalendarPage> {
               _selectedDay = selectedDay;
               _focusedDay = focusedDay;
             });
-            
+          },
+          //all about events loading 
+
+          eventLoader: (day) {
+            return _getEventsForDay(day);
           },
         ),
       ],
