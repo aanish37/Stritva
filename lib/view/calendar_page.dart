@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../model/events.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -13,10 +14,27 @@ class _CalendarPageState extends State<CalendarPage> {
   var _selectedDay = DateTime.now();
   var _focusedDay = DateTime.now();
   var _calendarFormat = CalendarFormat.week;
+ late ValueNotifier<List<Event>> _selectedEvents;
+
 
   List<Event> _getEventsForDay(DateTime day) {
-    return events[day] ?? [];
+    return kEvents[day] ?? [];
   }
+
+
+void initState() {
+    super.initState();
+
+    _selectedDay = _focusedDay;
+    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay));
+  }
+
+   @override
+  void dispose() {
+    _selectedEvents.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +77,43 @@ class _CalendarPageState extends State<CalendarPage> {
             return _getEventsForDay(day);
           },
         ),
+
+
+        const SizedBox(height: 8.0),
+          Expanded(
+            child: ValueListenableBuilder<List<Event>>(
+              valueListenable: _selectedEvents,
+              builder: (context, value, _) {
+                return ListView.builder(
+                  itemCount: value.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 12.0,
+                        vertical: 4.0,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: ListTile(
+                        onTap: () => print('${value[index]}'),
+                        title: Text('${value[index]}'),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+
+
+
+
+
+
+
+
       ],
     );
   }
