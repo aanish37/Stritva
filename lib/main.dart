@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './view/home_page.dart';
 import './constant.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,22 +15,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.pink[50],
-        
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          
-          backgroundColor: backgroundColor,
-          selectedItemColor: backgroundColor,
-          unselectedItemColor:backgroundColor,
-
-        ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        primarySwatch:Colors.purple ,
-      ),
-      home:  HomePage(),
+          scaffoldBackgroundColor: Color.fromARGB(255, 249, 230, 236),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: backgroundColor,
+            selectedItemColor: buttonColor,
+            unselectedItemColor: buttonColor,
+          ),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          primarySwatch: Colors.pink,
+          buttonTheme: ButtonThemeData(buttonColor: buttonColor)),
+      home: HomePage(),
     );
   }
 }
