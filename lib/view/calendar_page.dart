@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../constant.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../model/events.dart';
+// import '../model/eventWidget.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -9,32 +11,82 @@ class CalendarPage extends StatefulWidget {
   State<CalendarPage> createState() => _CalendarPageState();
 }
 
-class _CalendarPageState extends State<CalendarPage> {
+enum Options { search, upload, copy, exit }
 
+class _CalendarPageState extends State<CalendarPage> {
   var _selectedDay = DateTime.now();
   var _focusedDay = DateTime.now();
-  var _calendarFormat = CalendarFormat.week;
- late ValueNotifier<List<Event>> _selectedEvents;
+  var _calendarFormat = CalendarFormat.month;
 
+  DateTime _firstMensurationDay = DateTime(2023, 10, 20);
+  bool _dateClicked = false;
 
-  List<Event> _getEventsForDay(DateTime day) {
-    return kEvents[day] ?? [];
+  final int _cycleLength = 28;
+  final int _numberOfDays = 4;
+  int months = 12;
+
+  // bool checkMensturalDay(DateTime day) {
+  //   for (int i = 1; i < months; i++) {
+  //     if (day == _firstMensurationDay.add(Duration(days: i * _cycleLength))) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
+
+  bool isMenstrualDay(DateTime day) {
+    DateTime currentDate = _firstMensurationDay;
+    for (int i = 0; i < _numberOfDays * months; i++) {
+      if (day.year == currentDate.year &&
+          day.month == currentDate.month &&
+          day.day == currentDate.day) {
+            
+
+        return true;
+      }
+      currentDate = currentDate.add(Duration(days: _cycleLength));
+    }
+    return false;
   }
 
+  Widget _showPopUpMenu(BuildContext context) {
+    return PopupMenuButton(
+        itemBuilder: (BuildContext context) => [
+              _buildPopupMenuItem('Search', Icons.search, Options.search.index),
+              _buildPopupMenuItem('Upload', Icons.upload, Options.upload.index),
+              _buildPopupMenuItem('Copy', Icons.copy, Options.copy.index),
+              _buildPopupMenuItem(
+                  'Exit', Icons.exit_to_app, Options.exit.index),
+            ]);
+  }
 
-void initState() {
+  PopupMenuItem _buildPopupMenuItem(
+      String title, IconData iconData, int position) {
+    return PopupMenuItem(
+      value: position,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(
+            iconData,
+            color: Colors.black,
+          ),
+          Text(title),
+        ],
+      ),
+    );
+  }
+
+  void initState() {
     super.initState();
 
     _selectedDay = _focusedDay;
-    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay));
   }
 
-   @override
+  @override
   void dispose() {
-    _selectedEvents.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,72 +100,63 @@ void initState() {
           lastDay: DateTime.utc(2030, 3, 14),
           focusedDay: _focusedDay, // Use _focusedDay as the focused day
           calendarFormat: _calendarFormat, //which format like month or week
+          daysOfWeekHeight: 60,
           onPageChanged: (focusedDay) {
             _focusedDay = focusedDay;
           }, //to not change the focuse day when we reload
+          headerStyle: HeaderStyle(
+              titleTextStyle: TextStyle(
+                  color: buttonColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+              formatButtonTextStyle: TextStyle(color: buttonColor),
+              formatButtonDecoration: BoxDecoration(
+                border: Border.all(color: borderColor, width: 2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+
+              //for left icon
+              leftChevronIcon: Icon(
+                Icons.chevron_left_rounded,
+                color: borderColor,
+              ),
+              //for right icon
+              rightChevronIcon: Icon(
+                Icons.chevron_right_rounded,
+                color: borderColor,
+              )),
 
           onFormatChanged: (format) {
             setState(() {
               _calendarFormat = format;
               // When format changes, update the focusedDay accordingly
-              if (_calendarFormat == CalendarFormat.week) {
+              if (_calendarFormat == CalendarFormat.month) {
                 _focusedDay =
                     _selectedDay; // Set focusedDay to selectedDay for week view
               }
             });
           },
           selectedDayPredicate: (day) {
-            return isSameDay(_selectedDay, day);
+            return isMenstrualDay(day);
           },
           onDaySelected: (selectedDay, focusedDay) {
             setState(() {
               _selectedDay = selectedDay;
               _focusedDay = focusedDay;
+              _dateClicked = true;
             });
           },
-          //all about events loading 
 
-          eventLoader: (day) {
-            return _getEventsForDay(day);
-          },
+          calendarStyle: const CalendarStyle(
+              todayDecoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: borderColor,
+          )),
         ),
-
-
-        const SizedBox(height: 8.0),
-          Expanded(
-            child: ValueListenableBuilder<List<Event>>(
-              valueListenable: _selectedEvents,
-              builder: (context, value, _) {
-                return ListView.builder(
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 4.0,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: ListTile(
-                        onTap: () => print('${value[index]}'),
-                        title: Text('${value[index]}'),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-
-
-
-
-
-
-
-
+        // _dateClicked
+        //     ? _buildPopupMenuItem('Search', Icons.search, Options.search.index)
+        //     : Container(),
+        // const SizedBox(height: 8.0),
       ],
     );
   }
