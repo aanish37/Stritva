@@ -4,12 +4,13 @@ import './view/dashboard_page.dart';
 import './view/info_page.dart';
 import './view/profile_page.dart';
 
+const backgroundColor = Color.fromARGB(255, 249, 230, 236);
 
-const backgroundColor = (Colors.pinkAccent);
+var buttonColor = Colors.pinkAccent[400];
+var unselectedButtonColor = Colors.pink[200];
+var textColor = Colors.pinkAccent[700];
 
-var buttonColor = Color.fromARGB(255,179, 255, 236	);
-
-const borderColor = Color.fromARGB(255, 150, 211, 242);
+const borderColor = Colors.deepPurple;
 
 //FIREBASE
 
@@ -18,5 +19,4 @@ const pages = [
   CalendarPage(),
   InfoPage(),
   ProfilePage(),
-
 ];
