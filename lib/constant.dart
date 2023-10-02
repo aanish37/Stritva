@@ -12,6 +12,7 @@ var textColor = Colors.pinkAccent[700];
 
 const borderColor = Colors.deepPurple;
 
+
 //FIREBASE
 
 const pages = [
