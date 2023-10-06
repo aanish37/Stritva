@@ -65,8 +65,9 @@ class _CalendarPageState extends State<CalendarPage> {
       decoration: BoxDecoration(
           color: buttonColor, borderRadius: BorderRadius.circular(18)),
       child: PopupMenuButton(
+          offset: Offset(0, -100),
+          position: PopupMenuPosition.over,
           color: Colors.white,
-          position: PopupMenuPosition.under,
           tooltip: 'Click to View Options ',
           icon: Icon(
             Icons.add,
@@ -98,7 +99,6 @@ class _CalendarPageState extends State<CalendarPage> {
                       TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
-                            print('closed');
                           },
                           child: Text('close')),
                       TextButton(
@@ -122,6 +122,8 @@ class _CalendarPageState extends State<CalendarPage> {
                                   .showSnackBar(const SnackBar(
                                 content: Text('Sucessfully added'),
                                 duration: Duration(seconds: 2),
+                                backgroundColor: Colors.green,
+                                elevation: 3,
                               ));
                             }
                             Navigator.of(context).pop();
@@ -144,7 +146,6 @@ class _CalendarPageState extends State<CalendarPage> {
           {
             AlertDialog(
               actions: [
-
                 //show each emojios as a input field
                 for (int i = 0; i < emojis.length; i++)
                   TextButton(
@@ -250,14 +251,16 @@ class _CalendarPageState extends State<CalendarPage> {
 
               calendarStyle: CalendarStyle(
                 selectedDecoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20),
                   color: Colors.purple,
                 ),
 
                 //provie similar decoration for today as like other not like selected day
                 todayDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Color.fromARGB(255, 229, 128, 244),
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.purple[300],
                 ),
               ),
 
@@ -294,11 +297,10 @@ class _CalendarPageState extends State<CalendarPage> {
                 },
               ),
 
-              eventLoader: (day) =>
-                  Provider.of<NoteData>(context, listen: false)
-                      .notes
-                      .where((element) => element.dateTime == day)
-                      .toList(),
+              eventLoader: (day) => Provider.of<NoteData>(context, listen: true)
+                  .notes
+                  .where((element) => element.dateTime == day)
+                  .toList(),
             ),
             Expanded(
               child: Padding(

@@ -9,17 +9,16 @@ class NoteWidget extends StatelessWidget {
   DateTime _selectedDay;
   NoteWidget(this._selectedDay);
 
-  List<Note> _notesForDay = [];
-
   @override
   Widget build(BuildContext context) {
     return Consumer<NoteData>(builder: (context, noteData, child) {
+      List<Note> notesForDay = [];
       noteData.notes.forEach((note) {
         if (note.dateTime.day == _selectedDay.day) {
-          _notesForDay.add(note);
+          notesForDay.add(note);
         }
       });
-      return _notesForDay.isEmpty
+      return notesForDay.isEmpty
           ? Container(
               margin: EdgeInsets.all(30),
               child: Text(
@@ -27,7 +26,7 @@ class NoteWidget extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
               ))
           : ListView.builder(
-              itemCount: noteData.size,
+              itemCount: notesForDay.length,
               itemBuilder: (context, index) {
                 return Container(
                   margin: const EdgeInsets.symmetric(
@@ -53,19 +52,23 @@ class NoteWidget extends StatelessWidget {
                           color: borderColor,
                         ),
                         onPressed: () {
+                          notesForDay.remove(notesForDay[index]);
                           noteData.removeItem(noteData.notes[index]);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Deleted Notes!!')));
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Deleted Notes!!'),
+                            backgroundColor: const Color.fromARGB(255, 240, 41, 41),
+                          ));
                         },
                       ),
                       onLongPress: () {
+                        notesForDay.remove(notesForDay[index]);
                         noteData.removeItem(noteData.notes[index]);
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Deleted Notes!!')));
                       },
                       selectedColor: buttonColor,
                       title: Text(
-                        noteData.notes[index].note,
+                        notesForDay[index].note,
                         style: TextStyle(color: Colors.black),
                       ),
                       titleAlignment: ListTileTitleAlignment.threeLine),
