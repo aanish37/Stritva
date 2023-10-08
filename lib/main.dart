@@ -15,11 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create:(context)=>NoteData(),
+      create: (context) => NoteData(),
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+            fontFamily: 'Ubuntu',
             scaffoldBackgroundColor: Color.fromARGB(255, 249, 230, 236),
             bottomNavigationBarTheme: BottomNavigationBarThemeData(
               backgroundColor: backgroundColor,
