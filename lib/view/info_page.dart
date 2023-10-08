@@ -16,9 +16,25 @@ class InfoPage extends StatelessWidget {
       width: 140,
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
+            spreadRadius: 1,
             color: Colors.black, //New
-            blurRadius: 5.0,
-            offset: Offset(0, 10))
+            blurRadius: 1.0,
+            offset: Offset(0, 1)),
+        BoxShadow(
+            spreadRadius: 1,
+            color: Colors.black, //New
+            blurRadius: 2.0,
+            offset: Offset(0, 3)),
+        BoxShadow(
+            spreadRadius: 1,
+            color: Colors.black, //New
+            blurRadius: 2.0,
+            offset: Offset(0, 3)),
+        BoxShadow(
+            spreadRadius: 1,
+            color: Colors.black, //New
+            blurRadius: 2.0,
+            offset: Offset(0, 3))
       ], color: Colors.white, borderRadius: BorderRadius.circular(8)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +49,7 @@ class InfoPage extends StatelessWidget {
           ),
           Text(
             title,
-            style: TextStyle(color: borderColor, fontWeight: FontWeight.w500),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
           )
         ],
       ),
@@ -46,7 +62,10 @@ class InfoPage extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-            color: Colors.black, fontSize: 24, fontWeight: FontWeight.w500),
+            color: buttonColor,
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Montserrat'),
       ),
     );
   }

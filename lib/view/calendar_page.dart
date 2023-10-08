@@ -5,7 +5,7 @@ import 'package:stritva/model/note_data.dart';
 import 'package:stritva/widget/note_widget.dart';
 import '../constant.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:flutter_emoji/flutter_emoji.dart';
+import '../model/emoji.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -27,13 +27,8 @@ class _CalendarPageState extends State<CalendarPage> {
   final int _numberOfDays = 4;
   int months = 12;
 
-  List<String> emojis = ['😃', '😢', '😠', '😄', '❤️', '👍'];
-
-  void _selectEmoji(String emoji) {
-    setState(() {
-      print('Selected Emoji: $emoji');
-    });
-  }
+  String selectedEmoji = '';
+  String selectedEmojiName = '';
 
   bool isMenstrualDay(DateTime day) {
     DateTime currentDate = _firstMensurationDay;
@@ -116,6 +111,7 @@ class _CalendarPageState extends State<CalendarPage> {
                               data.addItem(Note(
                                   note: noteController.text,
                                   dateTime: _focusedDay));
+
                               noteController.clear();
 
                               ScaffoldMessenger.of(context)
@@ -144,17 +140,93 @@ class _CalendarPageState extends State<CalendarPage> {
           }
         else if (position == 1)
           {
-            AlertDialog(
-              actions: [
-                //show each emojios as a input field
-                for (int i = 0; i < emojis.length; i++)
-                  TextButton(
-                      onPressed: () {
-                        _selectEmoji(emojis[i]);
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(emojis[i]))
-              ],
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  actions: [
+                    Column(
+                      children: [
+                        Text(
+                          "Select",
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: buttonColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        for (int i = 0; i < emojis.length; i++)
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                selectedEmoji = emojis[i];
+                                selectedEmojiName = emoji_name[i];
+                              });
+
+                              //if no Emoji is selected
+
+                              if (selectedEmoji == '') {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text('Not selected '),
+                                  duration: Duration(seconds: 2),
+                                ));
+                              } else {
+                                var data = Provider.of<NoteData>(context,
+                                    listen: false);
+
+                                data.addEmoji(Emoji(
+                                    emoji: selectedEmoji,
+                                    emoji_name: selectedEmojiName,
+                                    day: _focusedDay));
+
+                                print(selectedEmoji);
+                                //after adding nullify all the string
+                                selectedEmoji = '';
+                                selectedEmojiName = '';
+
+                                //
+
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text('Sucessfully added'),
+                                  duration: Duration(seconds: 2),
+                                  backgroundColor: Colors.green,
+                                  elevation: 3,
+                                ));
+                              }
+                              Navigator.of(context).pop();
+                            },
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      emoji_name[i],
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      emojis[i],
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Divider(
+                                  thickness: 1,
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
+                );
+              },
             )
           }
         else if (position == 2)
@@ -214,7 +286,7 @@ class _CalendarPageState extends State<CalendarPage> {
                       fontSize: 18),
                   formatButtonTextStyle: TextStyle(color: buttonColor),
                   formatButtonDecoration: BoxDecoration(
-                    border: Border.all(color: borderColor, width: 2),
+                    border: Border.all(color: borderColor!, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
 
@@ -253,14 +325,14 @@ class _CalendarPageState extends State<CalendarPage> {
                 selectedDecoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.purple,
+                  color: borderColor,
                 ),
 
                 //provie similar decoration for today as like other not like selected day
                 todayDecoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.purple[300],
+                  color: borderColorLight,
                 ),
               ),
 
