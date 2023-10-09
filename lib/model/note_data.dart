@@ -14,9 +14,7 @@ class NoteData with ChangeNotifier {
   void addEmoji(Emoji emoji) {
     _emoji.removeWhere((element) => element.day == emoji.day);
 
-    print(emoji.emoji);
-    print('hello');
-
+  
     _emoji.add(emoji);
     notifyListeners();
   }
