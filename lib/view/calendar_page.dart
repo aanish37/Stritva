@@ -27,8 +27,8 @@ class _CalendarPageState extends State<CalendarPage> {
   final int _numberOfDays = 4;
   int months = 12;
 
-  String selectedEmoji = '';
-  String selectedEmojiName = '';
+  String selectedEmoji = ' ';
+  String selectedEmojiName = ' ';
 
   bool isMenstrualDay(DateTime day) {
     DateTime currentDate = _firstMensurationDay;
@@ -164,7 +164,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
                               //if no Emoji is selected
 
-                              if (selectedEmoji == '') {
+                              if (selectedEmoji == ' ') {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
                                   content: Text('Not selected '),
@@ -179,10 +179,9 @@ class _CalendarPageState extends State<CalendarPage> {
                                     emoji_name: selectedEmojiName,
                                     day: _focusedDay));
 
-                                print(selectedEmoji);
                                 //after adding nullify all the string
-                                selectedEmoji = '';
-                                selectedEmojiName = '';
+                                selectedEmoji = ' ';
+                                selectedEmojiName = ' ';
 
                                 //
 
@@ -262,6 +261,7 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: _showPopupMenu(context),
       body: Container(
         padding: EdgeInsets.all(5),
@@ -374,7 +374,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   .where((element) => element.dateTime == day)
                   .toList(),
             ),
-            Expanded(
+            Flexible(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: NoteWidget(_focusedDay),
