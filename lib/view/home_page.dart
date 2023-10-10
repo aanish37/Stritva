@@ -21,6 +21,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          
+          backgroundColor: backgroundColor,
+          elevation: 5,
           items: [
             BottomNavigationBarItem(
                 icon: _index == 0
@@ -41,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 icon: _index == 3
                     ? Icon(Icons.manage_accounts_rounded)
                     : Icon(Icons.manage_accounts_outlined),
-                label: 'Settings')
+                label: 'Profile')
           ],
           currentIndex: _index,
           onTap: _onItemTapped,

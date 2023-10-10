@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:stritva/view/showDetails.dart';
-import '../constant.dart';
 import 'color_showing.dart';
 
 class InfoPage extends StatelessWidget {
@@ -70,13 +69,13 @@ class InfoPage extends StatelessWidget {
 
   Widget _showTitle(String title) {
     return Container(
+
       padding: EdgeInsets.all(10),
       child: Text(
         title,
         style: TextStyle(
-          color: buttonColor,
           fontSize: 22,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w400,
           fontFamily: 'Ubuntu',
         ),
       ),
@@ -91,7 +90,7 @@ class InfoPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(padding: EdgeInsets.only(top: 50, bottom: 10)),
+            Padding(padding: EdgeInsets.only(top: 0, bottom: 10)),
             _showTitle('How to Use'),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
