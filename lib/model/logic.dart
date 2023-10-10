@@ -1,6 +1,6 @@
-DateTime periodStartDate = DateTime.now();
+DateTime periodStartDate = DateTime(2023, 10, 20);
 int periodLength = 4;
-int cycleLength = 28;
+int cycleLength = 30;
 
 Map<String, String> calculateMenstrualPhase(DateTime date) {
   // Calculate the day within the cycle
@@ -15,7 +15,7 @@ Map<String, String> calculateMenstrualPhase(DateTime date) {
   // Determine the phase based on the day in the cycle
   String phase;
   if (dayInCycle <= periodLength) {
-    phase = "Menstruation";
+    phase = "Menstruation Phase";
   } else if (dayInCycle <= cycleLength) {
     phase = "Follicular Phase";
   } else {
@@ -29,7 +29,7 @@ Map<String, String> calculateMenstrualPhase(DateTime date) {
     }
 
     // Update pregnancyChance based on the phase
-    if (phase == "Menstruation") {
+    if (phase == "Menstruation Phase") {
       pregnancyChance = "Low";
     } else if (phase == "Follicular Phase") {
       pregnancyChance = "Low";

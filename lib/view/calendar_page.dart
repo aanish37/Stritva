@@ -267,9 +267,6 @@ class _CalendarPageState extends State<CalendarPage> {
         padding: EdgeInsets.all(5),
         child: Column(
           children: [
-            SizedBox(
-              height: 80,
-            ),
             TableCalendar(
               firstDay: DateTime.utc(2010, 10, 16),
               lastDay: DateTime.utc(2030, 3, 14),
@@ -282,7 +279,7 @@ class _CalendarPageState extends State<CalendarPage> {
               headerStyle: HeaderStyle(
                   titleTextStyle: TextStyle(
                       color: buttonColor,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       fontSize: 18),
                   formatButtonTextStyle: TextStyle(color: buttonColor),
                   formatButtonDecoration: BoxDecoration(
