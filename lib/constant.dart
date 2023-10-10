@@ -20,7 +20,7 @@ List<String> emojis = ['😄', '😢', '😠', '❤️', '👍'];
 
 //FIREBASE
 
-const pages = [
+final pages = [
   DashboardPage(),
   CalendarPage(),
   InfoPage(),

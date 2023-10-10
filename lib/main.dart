@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:stritva/view/coming_soon.dart';
 import './view/home_page.dart';
 import './constant.dart';
 import './model/note_data.dart';
 import 'package:provider/provider.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => NoteData(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Strtiva',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             fontFamily: 'Ubuntu',
@@ -54,16 +54,41 @@ class MyApp extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: backgroundColor,
               centerTitle: true,
-              leading: Icon(
-                Icons.settings,
-                color: buttonColor,
+              leading: Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.notifications_none_outlined,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return const ComingSoon();
+                      }),
+                    );
+                  },
+                  color: buttonColor,
+                ),
               ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    height: 30,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset('asset/images/profile.png'),
+                    ),
+                  ),
+                ),
+              ],
               title: Text(
                 'Stritva',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: buttonColor,
-                ),
+                    fontWeight: FontWeight.w700,
+                    color: buttonColor,
+                    fontSize: 28),
               ),
             ),
             body: HomePage()),
