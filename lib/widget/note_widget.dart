@@ -35,58 +35,63 @@ class NoteWidget extends StatelessWidget {
       return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                emojiForDay.length == 0
-                    ? Container(child: Text(''))
-                    :
-                    //add a good design to show
-                    Container(
-                        width: 130,
-                        child: Card(
-                          elevation: 4, // Add elevation for a card-like effect
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                emojiForDay[0].emoji_name,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              emojiForDay.length == 0
+                  ? Container(child: Text(' '))
+                  :
+                  //add a good design to show
+                  Container(
+                      width: 130,
+                      child: Card(
+                        surfaceTintColor: Colors.white,
+                        elevation: 4, // Add elevation for a card-like effect
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              emojiForDay[0].emoji_name,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
                               ),
-                              SizedBox(
-                                  width:
-                                      15), // Add spacing between emoji name and emoji
-                              Text(
-                                emojiForDay[0].emoji,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
+                            ),
+                            SizedBox(
+                                width:
+                                    15), // Add spacing between emoji name and emoji
+                            Text(
+                              emojiForDay[0].emoji,
+                              style: TextStyle(
+                                fontSize: 20,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: 200, // Set the maximum width
-                    minWidth: 100, // Set the minimum width
-                  ),
-                  margin: EdgeInsets.all(0),
-                  padding: EdgeInsets.all(10),
-                  //decorate this container
-
-                  child: Card(elevation: 5, child: Text(phaseOfDay!)),
+                    ),
+              Container(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 5,
+                    ),
+                    representColor(buttonColor!, 'Flow'),
+                    SizedBox(width: 8),
+                    representColor(borderColor, 'Focus'),
+                    SizedBox(width: 8),
+                    representColor(borderColorLight, 'Today'),
+                    SizedBox(width: 8)
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
           ),
           notesForDay.isEmpty
               ? Container(

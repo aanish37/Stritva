@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stritva/view/edit_profile.dart';
 import '../constant.dart';
 import '../widget/profile_menu_widget.dart';
+import './update_details.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -43,7 +44,10 @@ class ProfilePage extends StatelessWidget {
               SizedBox(
                   width: 200,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditProfileScreen())),
                       child: Text(
                         'Edit Profile',
                         style: TextStyle(color: borderColor),
@@ -52,9 +56,13 @@ class ProfilePage extends StatelessWidget {
                 height: 20,
               ),
               ProfileMenuWidget(
-                  title: 'Change Details', icon: Icons.edit, onPress: () {}),
+                  title: 'Change Details',
+                  icon: Icons.edit,
+                  onPress: () => _changeDetailsFunc(context)),
               ProfileMenuWidget(
-                  title: 'Reports', icon: Icons.edit_document, onPress: () {}),
+                  title: 'Reports',
+                  icon: Icons.insert_drive_file_outlined,
+                  onPress: () {}),
               ProfileMenuWidget(
                   title: 'Settings', icon: Icons.settings, onPress: () {}),
               ProfileMenuWidget(
@@ -69,4 +77,13 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
+}
+
+ _changeDetailsFunc(BuildContext context){
+
+   Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditPeriodInfoScreen(),
+      ));
 }
