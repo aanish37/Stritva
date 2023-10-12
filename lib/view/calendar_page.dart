@@ -109,8 +109,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                   Provider.of<NoteData>(context, listen: false);
 
                               data.addItem(Note(
-                                  note: noteController.text,
-                                  dateTime: _focusedDay));
+                                  note: noteController.text, day: _focusedDay));
 
                               noteController.clear();
 
@@ -249,7 +248,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
   void initState() {
     super.initState();
-
+    Provider.of<NoteData>(context, listen: false).getDataFromPrefs();
     _selectedDay = _focusedDay;
   }
 
@@ -368,7 +367,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
               eventLoader: (day) => Provider.of<NoteData>(context, listen: true)
                   .notes
-                  .where((element) => element.dateTime == day)
+                  .where((element) => element.day == day)
                   .toList(),
             ),
             Flexible(

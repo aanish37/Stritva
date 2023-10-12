@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constant.dart';
+import 'coming_soon.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -20,8 +21,46 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: backgroundColor,
+          centerTitle: true,
+          leading: Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: IconButton(
+              icon: Icon(
+                Icons.notifications_none_outlined,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const ComingSoon();
+                  }),
+                );
+              },
+              color: buttonColor,
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Container(
+                height: 30,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset('asset/images/profile.png'),
+                ),
+              ),
+            ),
+          ],
+          title: Text(
+            'Stritva',
+            style: TextStyle(
+                fontWeight: FontWeight.w700, color: buttonColor, fontSize: 28),
+          ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
-          
           backgroundColor: backgroundColor,
           elevation: 5,
           items: [
