@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stritva/constant.dart';
+import 'package:stritva/view/intro/cycleLength.dart';
+import 'package:stritva/view/intro/periodLength.dart';
 
-DateTime _recentPeriodDate = DateTime.now();
-
-class PeriodInfo {
-  int cycleLength;
-  DateTime recentPeriodDate;
-  int periodLength;
-
-  PeriodInfo(this.cycleLength, this.recentPeriodDate, this.periodLength);
-}
+import '../model/user_data.dart';
+import 'package:provider/provider.dart';
 
 class EditPeriodInfoScreen extends StatefulWidget {
   @override
@@ -18,21 +13,20 @@ class EditPeriodInfoScreen extends StatefulWidget {
 
 class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
   TextEditingController _cycleLengthController = TextEditingController();
-  DateTime _recentPeriodDate = DateTime.now();
   TextEditingController _periodLengthController = TextEditingController();
-  PeriodInfo _periodInfo = PeriodInfo(28, DateTime.now(), 5); // Initial data
 
   @override
   void initState() {
     super.initState();
-    _cycleLengthController.text = _periodInfo.cycleLength.toString();
-    _periodLengthController.text = _periodInfo.periodLength.toString();
   }
+
+  var _recentPeriodDate = DateTime(2000, 10, 31);
+  final newDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _recentPeriodDate,
+      initialDate: newDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
@@ -42,23 +36,12 @@ class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
       });
   }
 
-  void _saveChanges() {
-    setState(() {
-      _periodInfo.cycleLength = int.tryParse(_cycleLengthController.text) ?? 28;
-      _periodInfo.recentPeriodDate = _recentPeriodDate;
-      _periodInfo.periodLength =
-          int.tryParse(_periodLengthController.text) ?? 5;
-    });
-    // You can save the updated period info to your database or perform other actions here
-    // For now, we'll just print the updated data
-    print("Updated Period Info:");
-    print("Cycle Length: ${_periodInfo.cycleLength}");
-    print("Recent Period Date: ${_periodInfo.recentPeriodDate}");
-    print("Period Length: ${_periodInfo.periodLength}");
-  }
-
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserData>(context, listen: false).user;
+    final cycleLength = user.cycleLength;
+    final periodLegth = user.periodLength;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
@@ -68,7 +51,26 @@ class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
             icon: Icon(
               Icons.save,
             ),
-            onPressed: _saveChanges,
+            onPressed: () {
+              if (_cycleLengthController.text.isEmpty) {
+                _cycleLengthController.text = cycleLength.toString();
+              }
+              if (_periodLengthController.text.isEmpty) {
+                _periodLengthController.text = periodLegth.toString();
+              }
+              if (_recentPeriodDate == DateTime(2000, 10, 31)) {
+                _recentPeriodDate = user.recentPeriodDate;
+              }
+
+              Provider.of<UserData>(context, listen: false)
+                  .addCycleLength(int.parse(_cycleLengthController.text));
+              Provider.of<UserData>(context, listen: false)
+                  .addPeriodLength(int.parse(_periodLengthController.text));
+
+              Provider.of<UserData>(context, listen: false)
+                  .addRecentPeriodDate(_recentPeriodDate);
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
