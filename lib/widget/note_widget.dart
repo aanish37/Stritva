@@ -12,6 +12,8 @@ class NoteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<NoteData>(builder: (context, noteData, child) {
+
+
       // Ensure that data is loaded before proceeding
       if (noteData.isDataLoaded == false) {
         return CircularProgressIndicator(); // Display a progress indicator
@@ -25,9 +27,9 @@ class NoteWidget extends StatelessWidget {
           .where((emoji) => emoji.day.day == _focusedDay.day)
           .toList();
 
-      String? phaseOfDay = calculateMenstrualPhase(_focusedDay)['phase'];
-      String? pregnancyChanceOfDay =
-          calculateMenstrualPhase(_focusedDay)['pregnancyChance'];
+      // String? phaseOfDay = calculateMenstrualPhase(_focusedDay)['phase'];
+      // String? pregnancyChanceOfDay =
+      //     calculateMenstrualPhase(_focusedDay,)['pregnancyChance'];
 
       return SingleChildScrollView(
         child: Column(

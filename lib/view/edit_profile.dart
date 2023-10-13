@@ -1,42 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../model/user_data.dart';
 import 'package:stritva/constant.dart';
-
-class User {
-  String username;
-  String email;
-
-  User(this.username, this.email);
-}
 
 class EditProfileScreen extends StatefulWidget {
   @override
-  _EditProfileScreenState createState() => _EditProfileScreenState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController _usernameController = TextEditingController();
+
   TextEditingController _emailController = TextEditingController();
-  User _user = User('john Doe', 'johndow@'); // Initial user data
-
-  @override
-  void initState() {
-    super.initState();
-    _usernameController.text = _user.username;
-    _emailController.text = _user.email;
-  }
-
-  void _saveChanges() {
-    setState(() {
-      _user.username = _usernameController.text;
-      _user.email = _emailController.text;
-    });
-    print("Updated User Data:");
-    print("Username: ${_user.username}");
-    print("Email: ${_user.email}");
-  }
 
   @override
   Widget build(BuildContext context) {
+    final _user =
+        Provider.of<UserData>(context, listen: false).user; // Initial user data
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit Profile"),
@@ -46,7 +27,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             icon: Icon(
               Icons.save,
             ),
-            onPressed: _saveChanges,
+            onPressed: () {
+              if (_usernameController.text.isEmpty) {
+                _usernameController.text = _user.username;
+              }
+              if (_emailController.text.isEmpty) {
+                _emailController.text = _user.email;
+              }
+
+              if (_usernameController.text.isEmpty ||
+                  _emailController.text.isEmpty) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Error"),
+                        content: Text("Please fill all the fields"),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("OK"))
+                        ],
+                      );
+                    });
+              }
+
+              Provider.of<UserData>(context, listen: false).addNameEmail(
+                  _usernameController.text, _emailController.text);
+
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
