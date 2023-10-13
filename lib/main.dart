@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:stritva/view/coming_soon.dart';
-import './view/home_page.dart';
+import 'package:stritva/model/user_data.dart';
+import 'package:stritva/view/home_page.dart';
+import 'package:stritva/view/splash_screen.dart';
 import './constant.dart';
 import './model/note_data.dart';
 import 'package:provider/provider.dart';
-
-import './view/first/first.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,14 +16,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => NoteData(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => NoteData(),
+        ),
+        ChangeNotifierProvider<UserData>(
+          create: (context) => UserData(),
+        )
+      ],
       child: MaterialApp(
-        title: 'Strtiva',
-        debugShowCheckedModeBanner: false,
         theme: ThemeData(
             fontFamily: 'Ubuntu',
-            textTheme: TextTheme(
+            textTheme: const TextTheme(
               bodyMedium: TextStyle(
                 fontFamily: 'Ubuntu',
                 fontWeight: FontWeight.w400,
@@ -43,16 +47,9 @@ class MyApp extends StatelessWidget {
               ),
             ),
             scaffoldBackgroundColor: backgroundColor,
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(
-              backgroundColor: backgroundColor,
-              selectedItemColor: buttonColor,
-              unselectedItemColor: buttonColor,
-            ),
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
             primarySwatch: Colors.pink,
             buttonTheme: ButtonThemeData(buttonColor: buttonColor)),
-        home: Scaffold(resizeToAvoidBottomInset: false, body: FirstPage()),
+        home: SplashScreen(),
       ),
     );
   }

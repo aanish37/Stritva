@@ -69,7 +69,6 @@ class InfoPage extends StatelessWidget {
 
   Widget _showTitle(String title) {
     return Container(
-
       padding: EdgeInsets.all(10),
       child: Text(
         title,

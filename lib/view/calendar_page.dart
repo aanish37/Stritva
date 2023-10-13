@@ -6,6 +6,7 @@ import 'package:stritva/widget/note_widget.dart';
 import '../constant.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../model/emoji.dart';
+import '../model/user_data.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -21,16 +22,13 @@ class _CalendarPageState extends State<CalendarPage> {
   var _focusedDay = DateTime.now();
   var _calendarFormat = CalendarFormat.month;
 
-  DateTime _firstMensurationDay = DateTime(2023, 10, 20);
-
-  final int _cycleLength = 30;
-  final int _numberOfDays = 4;
   int months = 12;
 
   String selectedEmoji = ' ';
   String selectedEmojiName = ' ';
 
-  bool isMenstrualDay(DateTime day) {
+  bool isMenstrualDay(DateTime day, DateTime _firstMensurationDay,
+      int _cycleLength, int _numberOfDays) {
     DateTime currentDate = _firstMensurationDay;
 
     // Iterate through each month
@@ -259,6 +257,13 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserData>(context, listen: false).user;
+
+    DateTime _firstMensurationDay = user.recentPeriodDate;
+
+    final int _cycleLength = user.cycleLength;
+    final int _numberOfDays = user.periodLength;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: _showPopupMenu(context),
@@ -335,7 +340,8 @@ class _CalendarPageState extends State<CalendarPage> {
               calendarBuilders: CalendarBuilders(
                 //need to colour using isMenstrualDay
                 defaultBuilder: (context, day, focusedDay) {
-                  if (isMenstrualDay(day)) {
+                  if (isMenstrualDay(
+                      day, _firstMensurationDay, _cycleLength, _numberOfDays)) {
                     return Container(
                       margin: const EdgeInsets.all(4.0),
                       alignment: Alignment.center,

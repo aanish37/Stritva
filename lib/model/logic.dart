@@ -1,8 +1,12 @@
-DateTime periodStartDate = DateTime(2023, 10, 20);
-int periodLength = 4;
-int cycleLength = 30;
 
-Map<String, String> calculateMenstrualPhase(DateTime date) {
+
+
+
+
+
+
+
+Map<String, String> calculateMenstrualPhase(DateTime date,int periodLength,int cycleLength,DateTime periodStartDate) {
   // Calculate the day within the cycle
   int dayInCycle = date.difference(periodStartDate).inDays + 1;
 

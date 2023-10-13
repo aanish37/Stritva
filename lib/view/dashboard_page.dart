@@ -2,16 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:stritva/constant.dart';
 import 'package:stritva/model/logic.dart';
 import 'package:intl/intl.dart';
+import 'package:stritva/view/intro/periodLength.dart';
+import '../model/user_data.dart';
+import 'package:provider/provider.dart';
 
 class DashboardPage extends StatelessWidget {
   DashboardPage({super.key});
-
-  final String userName = 'yubi';
 
   final date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserData>(context, listen: false).user;
+    final userName = user.username;
+    final periodLength = user.periodLength;
+    final cycleLength = user.cycleLength;
+    final recentPeriodDate = user.recentPeriodDate;
+
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Padding(
@@ -90,12 +97,16 @@ class DashboardPage extends StatelessWidget {
               children: [
                 todayDetails(
                     'Today\'s Phase',
-                    calculateMenstrualPhase(DateTime.now())
+                    calculateMenstrualPhase(DateTime.now(), periodLength,
+                            cycleLength, recentPeriodDate)
                         .values
                         .elementAt(0)),
                 todayDetails(
                   'Pregnancy',
-                  calculateMenstrualPhase(DateTime.now()).values.elementAt(1) +
+                  calculateMenstrualPhase(DateTime.now(), periodLength,
+                              cycleLength, recentPeriodDate)
+                          .values
+                          .elementAt(1) +
                       ' chance',
                 )
               ],
@@ -104,14 +115,7 @@ class DashboardPage extends StatelessWidget {
           Container(
               margin: EdgeInsets.only(top: 20),
               alignment: Alignment.center,
-              // decoration: BoxDecoration(
-              //   color: Color.fromARGB(255, 246, 227, 227),
-              //   borderRadius: BorderRadius.circular(12),
-              //   border: Border.all(
-              //     width: 1,
-              //     color: borderColorLight!.withOpacity(0.8),
-              //   ),
-              // ),
+             
               height: size.height * .27,
               width: size.width * .9,
               child: SingleChildScrollView(
