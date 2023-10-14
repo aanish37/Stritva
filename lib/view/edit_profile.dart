@@ -4,35 +4,37 @@ import '../model/user_data.dart';
 import 'package:stritva/constant.dart';
 
 class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
+
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final _user =
+    final user =
         Provider.of<UserData>(context, listen: false).user; // Initial user data
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile"),
+        title: const Text("Edit Profile"),
         backgroundColor: backgroundColor,
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.save,
             ),
             onPressed: () {
               if (_usernameController.text.isEmpty) {
-                _usernameController.text = _user.username;
+                _usernameController.text = user.username;
               }
               if (_emailController.text.isEmpty) {
-                _emailController.text = _user.email;
+                _emailController.text = user.email;
               }
 
               if (_usernameController.text.isEmpty ||
@@ -41,14 +43,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Error"),
-                        content: Text("Please fill all the fields"),
+                        title: const Text("Error"),
+                        content: const Text("Please fill all the fields"),
                         actions: [
                           TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text("OK"))
+                              child: const Text("OK"))
                         ],
                       );
                     });
@@ -72,7 +74,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               decoration: InputDecoration(
                   labelText: "Username", focusColor: buttonColor),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextFormField(
               controller: _emailController,
               decoration: InputDecoration(

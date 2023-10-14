@@ -5,7 +5,7 @@ class ColorShowing extends StatelessWidget {
   String title;
   String image;
 
-  ColorShowing({
+  ColorShowing({super.key, 
     required this.title,
     required this.image,
   });
@@ -36,7 +36,7 @@ class ColorShowing extends StatelessWidget {
                   children: [
                     Text(
                       entry.key,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -46,9 +46,9 @@ class ColorShowing extends StatelessWidget {
                           index++], //use of postincrement so after doing it increases
                       height: 100,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     for (var description in entry.value) Text(description),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                   ],
                 ),
             ],

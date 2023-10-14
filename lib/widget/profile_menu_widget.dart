@@ -7,7 +7,7 @@ class ProfileMenuWidget extends StatelessWidget {
   final Function onPress;
   final Color textColor;
 
-  ProfileMenuWidget({
+  const ProfileMenuWidget({
     super.key,
     required this.title,
     required this.icon,

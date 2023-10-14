@@ -5,10 +5,12 @@ class ShowDetails extends StatelessWidget {
   String title;
   String image;
   int index;
-  ShowDetails({required this.title, required this.image, required this.index});
+  ShowDetails({super.key, required this.title, required this.image, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
     Map<String, List<String>> selectedGuidelines =
         menstrualGuidelines.values.toList()[index];
 
@@ -25,7 +27,7 @@ class ShowDetails extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(
                 image,
-                height: 150,
+                height: height * 0.1814,
               ),
             ),
             const SizedBox(
@@ -51,7 +53,7 @@ class ShowDetails extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             item,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w400),
                           ),
                         );

@@ -17,22 +17,22 @@ class ProfilePage extends StatelessWidget {
     final username = user.username;
     final userEmail = user.email;
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               'Profile',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Container(
+            SizedBox(
               height: size.height * 0.2,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(size.width * 0.92),
@@ -41,10 +41,10 @@ class ProfilePage extends StatelessWidget {
             ),
             Text(
               username,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(userEmail),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             SizedBox(
@@ -53,12 +53,12 @@ class ProfilePage extends StatelessWidget {
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => EditProfileScreen())),
-                    child: Text(
+                            builder: (context) => const EditProfileScreen())),
+                    child: const Text(
                       'Edit Profile',
                       style: TextStyle(color: borderColor),
                     ))),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ProfileMenuWidget(

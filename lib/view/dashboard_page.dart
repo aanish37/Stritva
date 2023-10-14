@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stritva/constant.dart';
 import 'package:stritva/model/logic.dart';
 import 'package:intl/intl.dart';
-import 'package:stritva/view/intro/periodLength.dart';
 import '../model/user_data.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,10 @@ class DashboardPage extends StatelessWidget {
     final cycleLength = user.cycleLength;
     final recentPeriodDate = user.recentPeriodDate;
 
-    Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
+   
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -27,60 +29,58 @@ class DashboardPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 '  नमस्कार,  ',
                 style: TextStyle(
                   fontSize: 20,
                 ),
               ),
-              SizedBox(
-                width: 5,
-              ),
+
               // Container(
               //     height: 50,
               //     width: 50,
               //     child: Image.asset('asset/images/namaskar.png')),
-              SizedBox(width: 10),
+              const SizedBox(width: 15),
               Text(
                 userName,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.pink),
               ),
               SizedBox(
-                width: 40,
+                width: width * .3,
               ),
             ],
           ),
           SizedBox(
-            height: 10,
+            height: height * 0.022093,
           ),
           Card(
             elevation: 10,
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromARGB(255, 246, 227, 227),
+                color: const Color.fromARGB(255, 246, 227, 227),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    height: 70,
+                  SizedBox(
+                    height: height * 0.0846,
                     child: Image.asset('asset/images/clock.png'),
                   ),
                   Column(
                     children: [
                       Text(
                         DateFormat.yMMMd().format(date),
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       ),
                       Text(
                         DateFormat.EEEE().format(date),
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       ),
                     ],
                   ),
@@ -89,7 +89,7 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: height * .044,
           ),
           SingleChildScrollView(
             child: Row(
@@ -100,43 +100,43 @@ class DashboardPage extends StatelessWidget {
                     calculateMenstrualPhase(DateTime.now(), periodLength,
                             cycleLength, recentPeriodDate)
                         .values
-                        .elementAt(0)),
+                        .elementAt(0),
+                    size),
                 todayDetails(
                   'Pregnancy',
-                  calculateMenstrualPhase(DateTime.now(), periodLength,
+                  '${calculateMenstrualPhase(DateTime.now(), periodLength,
                               cycleLength, recentPeriodDate)
                           .values
-                          .elementAt(1) +
-                      ' chance',
+                          .elementAt(1)} chance',
+                  size,
                 )
               ],
             ),
           ),
           Container(
-              margin: EdgeInsets.only(top: 20),
+              margin: EdgeInsets.only(top: height * .034),
               alignment: Alignment.center,
-             
-              height: size.height * .27,
-              width: size.width * .9,
+              height: height * .27,
+              width: width * .9,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'My Cycle',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: height * .019,
                     ),
                     Row(children: [
-                      _showContainer('Period Length', periodLength),
+                      _showContainer('Period Length', periodLength, size),
                       SizedBox(
-                        width: 14,
+                        width: height * .017,
                       ),
-                      _showContainer('Cycle Length', cycleLength),
+                      _showContainer('Cycle Length', cycleLength, size),
                     ]),
                   ],
                 ),
@@ -146,31 +146,103 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
-  Widget todayDetails(String name, String data) {
+  Widget _showContainer(name, length, size) {
+    final height = size.height;
+    final width = size.width;
+    String status = 'Normal';
+
+    //some logic to calculate whether it is normal or bad
+    //
+    //
+    if (name == 'Period Length') {
+      if (length < 7 && length > 2) {
+        status = 'Normal';
+      } else {
+        status = 'Bad';
+      }
+    }
+
+    if (name == 'Cycle Length') {
+      if (length < 35 && length > 21) {
+        status = 'Normal';
+      } else {
+        status = 'Bad';
+      }
+    }
+    return Card(
+      elevation: 10,
+      color: const Color.fromARGB(255, 246, 227, 227),
+      surfaceTintColor: const Color.fromARGB(255, 246, 227, 227),
+      child: Container(
+        height: height * 0.18744,
+        width: width * 0.395,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              status,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 22,
+                color: status == 'Normal'
+                    ? const Color.fromARGB(255, 31, 190, 123)
+                    : Colors.red,
+              ),
+            ),
+            Text(
+              length.toString(),
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                color: buttonColor,
+                fontSize: 30,
+              ),
+            ),
+            SizedBox(
+              height: height * 0.012,
+            ),
+            Text(
+              name,
+              style: const TextStyle(
+                fontWeight: FontWeight.w200,
+                fontSize: 16,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget todayDetails(String name, String data, size) {
+    final height = size.height;
+    final width = size.width;
     return Card(
       elevation: 10,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      color: Color.fromARGB(255, 246, 227, 227),
+      color: const Color.fromARGB(255, 246, 227, 227),
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           // border: Border.all(width: 1, color: borderColor),
           borderRadius: BorderRadius.circular(20),
-          color: Color.fromARGB(255, 246, 227, 227),
+          color: const Color.fromARGB(255, 246, 227, 227),
         ),
-        height: 200,
-        width: 170,
+        height: height * 0.2418,
+        width: width * 0.43280,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(name,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
               Text(data,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              Text(
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text(
                 'Know your Period days better',
                 style: TextStyle(fontWeight: FontWeight.w300),
               ),
@@ -190,72 +262,4 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _showContainer(name, length) {
-  String status = 'Normal';
-
-  //some logic to calculate whether it is normal or bad
-  //
-  //
-  if (name == 'Period Length') {
-    if (length < 7 && length > 2) {
-      status = 'Normal';
-    } else {
-      status = 'Bad';
-    }
-  }
-
-  if (name == 'Cycle Length') {
-    if (length < 35 && length > 21) {
-      status = 'Normal';
-    } else {
-      status = 'Bad';
-    }
-  }
-  return Card(
-    elevation: 10,
-    color: Color.fromARGB(255, 246, 227, 227),
-    surfaceTintColor: Color.fromARGB(255, 246, 227, 227),
-    child: Container(
-      height: 155,
-      width: 155,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            status,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 22,
-              color: status == 'Normal'
-                  ? Color.fromARGB(255, 31, 190, 123)
-                  : Colors.red,
-            ),
-          ),
-          Text(
-            length.toString(),
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              color: buttonColor,
-              fontSize: 30,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            name,
-            style: TextStyle(
-              fontWeight: FontWeight.w200,
-              fontSize: 16,
-            ),
-          )
-        ],
-      ),
-    ),
-  );
 }

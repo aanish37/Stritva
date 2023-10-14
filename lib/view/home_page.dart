@@ -15,16 +15,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Future<void> getBool() async {
-  //   SharedPreferences prefs =
-  //       await SharedPreferences.getInstance() as SharedPreferences;
-  //   prefs.setBool('seen', false);
-  // }
+  Future<void> getBool() async {
+    SharedPreferences prefs =
+        await SharedPreferences.getInstance();
+    prefs.setBool('seen', false);
+  }
 
   Future<void> setBool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('seen', true);
-
 
     Provider.of<UserData>(context, listen: false).getUserFromPrefs();
   }
@@ -82,14 +81,15 @@ class _HomePageState extends State<HomePage> {
           buttonTheme: ButtonThemeData(buttonColor: buttonColor)),
       home: Scaffold(
           resizeToAvoidBottomInset: false,
+          
           backgroundColor: backgroundColor,
           appBar: AppBar(
             backgroundColor: backgroundColor,
             centerTitle: true,
             leading: Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 10),
               child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.notifications_none_outlined,
                 ),
                 onPressed: () {
@@ -130,23 +130,23 @@ class _HomePageState extends State<HomePage> {
             items: [
               BottomNavigationBarItem(
                   icon: _index == 0
-                      ? Icon(Icons.dashboard_rounded)
-                      : Icon(Icons.dashboard_outlined),
+                      ? const Icon(Icons.dashboard_rounded)
+                      : const Icon(Icons.dashboard_outlined),
                   label: 'dashboard'),
               BottomNavigationBarItem(
                   icon: _index == 1
-                      ? Icon(Icons.calendar_month_sharp)
-                      : Icon(Icons.calendar_month_outlined),
+                      ? const Icon(Icons.calendar_month_sharp)
+                      : const Icon(Icons.calendar_month_outlined),
                   label: 'calendar'),
               BottomNavigationBarItem(
                   icon: _index == 2
-                      ? Icon(Icons.tips_and_updates_sharp)
-                      : Icon(Icons.tips_and_updates_outlined),
+                      ? const Icon(Icons.tips_and_updates_sharp)
+                      : const Icon(Icons.tips_and_updates_outlined),
                   label: 'info'),
               BottomNavigationBarItem(
                   icon: _index == 3
-                      ? Icon(Icons.manage_accounts_rounded)
-                      : Icon(Icons.manage_accounts_outlined),
+                      ? const Icon(Icons.manage_accounts_rounded)
+                      : const Icon(Icons.manage_accounts_outlined),
                   label: 'Profile')
             ],
             currentIndex: _index,

@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:stritva/constant.dart';
@@ -6,7 +7,10 @@ import 'package:provider/provider.dart';
 import '../../model/user_data.dart';
 
 class CycleLength extends StatefulWidget {
+  const CycleLength({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _CycleLength createState() => _CycleLength();
 }
 
@@ -17,49 +21,17 @@ class _CycleLength extends State<CycleLength> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Menstrual Cycle Length',
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              NumberPicker(
-                step: 1,
-
-                value: menstrualCycleLength,
-                minValue: 15,
-                maxValue: 50, // Adjust the maximum value as needed
-                onChanged: (value) {
-                  setState(() {
-                    menstrualCycleLength = value;
-                  });
-                },
-                itemWidth: 60,
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(
-                'Cancel',
-                style: TextStyle(color: borderColor),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text(
-                'Save',
-                style: TextStyle(color: borderColor),
-              ),
-              onPressed: () {
-                // Use the selected menstrual cycle length (menstrualCycleLength) as needed
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+        return CycleLengthPickerDialog(
+          initialCycleLength: menstrualCycleLength,
+          onChanged: (value) {
+            setState(() {
+              menstrualCycleLength = value;
+            });
+          },
+          onSaved: () {
+            // Use the selected menstrual cycle length (menstrualCycleLength) as needed
+            Navigator.of(context).pop();
+          },
         );
       },
     );
@@ -67,30 +39,39 @@ class _CycleLength extends State<CycleLength> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Image.asset('asset/images/period_cycle.png'),
-            Text(
+            SizedBox(
+              height: height * 0.01040041,
+            ),
+            Image.asset(
+              'asset/images/period_cycle.png',
+              height: height * 0.55,
+            ),
+            const Text(
               'Menstrual Cycle Length?',
               style: TextStyle(fontSize: 30),
             ),
             SizedBox(
-              height: 50,
+              height: height * 0.0555835,
             ),
-            Text(
-              '$menstrualCycleLength',
-              style: TextStyle(color: buttonColor, fontSize: 30),
+            CycleLengthValueText(
+              menstrualCycleLength: menstrualCycleLength,
             ),
             SizedBox(
-              height: 50,
+              height: height * 0.01075,
             ),
 
             // Button to show the modal bottom sheet
             TextButton(
               onPressed: _showCycleLengthPicker,
-              child: Text(
+              child: const Text(
                 'Set Menstrual Cycle Length',
                 style: TextStyle(color: borderColor),
                 selectionColor: borderColor,
@@ -98,7 +79,7 @@ class _CycleLength extends State<CycleLength> {
             ),
 
             SizedBox(
-              height: 90,
+              height: height * 0.103,
             ),
             TextButton.icon(
               onPressed: () {
@@ -108,20 +89,134 @@ class _CycleLength extends State<CycleLength> {
                   return PeriodLength();
                 }));
               },
-              icon: Icon(Icons.arrow_forward_ios_rounded),
-              label: Text('Next'),
+              icon: const Icon(Icons.arrow_forward_ios_rounded),
+              label: const Text('Next'),
               style: ElevatedButton.styleFrom(
                 primary: buttonColor,
                 onPrimary: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.25, vertical: height * 0.02418),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class CycleLengthPickerDialog extends StatefulWidget {
+  final int initialCycleLength;
+  final ValueChanged<int> onChanged;
+  final VoidCallback onSaved;
+
+  const CycleLengthPickerDialog({
+    super.key,
+    required this.initialCycleLength,
+    required this.onChanged,
+    required this.onSaved,
+  });
+
+  @override
+  _CycleLengthPickerDialogState createState() =>
+      _CycleLengthPickerDialogState();
+}
+
+class _CycleLengthPickerDialogState extends State<CycleLengthPickerDialog> {
+  int selectedCycleLength = 28;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCycleLength = widget.initialCycleLength;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Menstrual Cycle Length'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          NumberPicker(
+            step: 1,
+            value: selectedCycleLength,
+            minValue: 15,
+            maxValue: 50,
+            onChanged: (value) {
+              setState(() {
+                selectedCycleLength = value;
+                widget.onChanged(value);
+              });
+            },
+            itemWidth: 60,
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: const Text(
+            'Cancel',
+            style: TextStyle(color: borderColor),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          child: const Text(
+            'Save',
+            style: TextStyle(color: borderColor),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class CycleLengthValueText extends StatefulWidget {
+  final int menstrualCycleLength;
+
+  const CycleLengthValueText({
+    super.key,
+    required this.menstrualCycleLength,
+  });
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _CycleLengthValueTextState createState() => _CycleLengthValueTextState();
+}
+
+class _CycleLengthValueTextState extends State<CycleLengthValueText> {
+  late int menstrualCycleLength;
+
+  @override
+  void initState() {
+    super.initState();
+    menstrualCycleLength = widget.menstrualCycleLength;
+  }
+
+  @override
+  void didUpdateWidget(CycleLengthValueText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.menstrualCycleLength != oldWidget.menstrualCycleLength) {
+      setState(() {
+        menstrualCycleLength = widget.menstrualCycleLength;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '$menstrualCycleLength',
+      style: TextStyle(color: buttonColor, fontSize: 30),
     );
   }
 }

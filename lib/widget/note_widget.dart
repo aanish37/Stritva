@@ -16,7 +16,7 @@ class NoteWidget extends StatelessWidget {
 
       // Ensure that data is loaded before proceeding
       if (noteData.isDataLoaded == false) {
-        return CircularProgressIndicator(); // Display a progress indicator
+        return const CircularProgressIndicator(); // Display a progress indicator
       }
 
       // Filter notes and emojis for the specified day

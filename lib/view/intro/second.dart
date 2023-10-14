@@ -7,44 +7,55 @@ class SecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    final height = size.height;
+    final width = size.width;
     return Scaffold(
-      body: Column(children: [
-        SizedBox(
-          height: 150,
-        ),
-        Text(
-          'Track Your Periods & Fertility ',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 33, color: buttonColor, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 40),
-        Container(
-          width: 300,
-          child: Image.asset('asset/images/girl.png'),
-        ),
-        SizedBox(height: 185),
-        TextButton.icon(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return  UserName();
-              }),
-            );
-          },
-          icon: Icon(Icons.arrow_forward_ios_rounded),
-          label: Text('Next'),
-          style: ElevatedButton.styleFrom(
-            primary: buttonColor,
-            onPrimary: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(children: [
+            SizedBox(
+              height: height * 0.14140041,
             ),
-            padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-          ),
+            Text(
+              'Track Your Periods & Fertility ',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: height * 0.061,
+                  color: buttonColor,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: height * 0.1037),
+            SizedBox(
+              width: width * 0.76,
+              child: Image.asset('asset/images/girl.png'),
+            ),
+            SizedBox(height: height * 0.13372),
+            TextButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return UserName();
+                  }),
+                );
+              },
+              icon: const Icon(Icons.arrow_forward_ios_rounded),
+              label: const Text('Next'),
+              style: ElevatedButton.styleFrom(
+                primary: buttonColor,
+                onPrimary: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.25, vertical: height * 0.02418),
+              ),
+            ),
+          ]),
         ),
-      ]),
+      ),
     );
   }
 }

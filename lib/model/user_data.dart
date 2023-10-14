@@ -25,6 +25,8 @@ class UserData with ChangeNotifier {
       _user.cycleLength = decodedUser['cycleLength'];
       _user.recentPeriodDate = DateTime.parse(decodedUser['recentPeriodDate']);
       _user.periodLength = decodedUser['periodLength'];
+
+      print(_user);
     }
     notifyListeners();
   }

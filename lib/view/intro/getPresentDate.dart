@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:stritva/view/home_page.dart';
 import '../../model/user_data.dart';
 
-DateTime _recentPeriodDate = DateTime.now();
 
 class GetPresentDate extends StatefulWidget {
+  const GetPresentDate({super.key});
+
   @override
   _GetPresentDate createState() => _GetPresentDate();
 }
@@ -26,80 +27,87 @@ class _GetPresentDate extends State<GetPresentDate> {
       firstDate: DateTime(2020),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != _recentPeriodDate)
+    if (picked != null && picked != _recentPeriodDate) {
       setState(() {
         _recentPeriodDate = picked;
       });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
+    
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            SizedBox(height: 16),
-            Container(
-              margin: EdgeInsets.only(
-                bottom: 20,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(height * 0.019),
+          child: Column(
+            children: [
+              SizedBox(height: height * 0.019),
+              Container(
+                margin: EdgeInsets.only(
+                  bottom: height * 0.0241,
+                ),
+                height: height * 0.4839,
+                width: width * 0.9,
+                child: Image.asset(
+                  'asset/images/present_date.png',
+                  height: height * 0.4839,
+                ),
               ),
-              height: 400,
-              width: 400,
-              child: Image.asset(
-                'asset/images/present_date.png',
-                height: 200,
-                width: 200,
+              const Text(
+                'Select your recent period date..',
+                style: TextStyle(color: borderColor, fontSize: 28),
               ),
-            ),
-            Text(
-              'Select your recent period date..',
-              style: TextStyle(color: borderColor, fontSize: 28),
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    readOnly: true,
-                    controller: TextEditingController(
-                        text: "${_recentPeriodDate.toLocal()}".split(' ')[0]),
-                    keyboardType: TextInputType.datetime,
-                    decoration: InputDecoration(
-                      labelText: "Recent Period Date",
+              SizedBox(height: height * 0.0241),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      readOnly: true,
+                      controller: TextEditingController(
+                          text: "${_recentPeriodDate.toLocal()}".split(' ')[0]),
+                      keyboardType: TextInputType.datetime,
+                      decoration: const InputDecoration(
+                        labelText: "Recent Period Date",
+                      ),
                     ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () => _selectDate(context),
-                  child: Icon(
-                    Icons.calendar_today,
-                    color: buttonColor,
+                  TextButton(
+                    onPressed: () => _selectDate(context),
+                    child: Icon(
+                      Icons.calendar_today,
+                      color: buttonColor,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 90),
-            TextButton.icon(
-              onPressed: () {
-                Provider.of<UserData>(context, listen: false)
-                    .addRecentPeriodDate(_recentPeriodDate);
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return HomePage();
-                }));
-              },
-              icon: Icon(Icons.arrow_forward_ios_rounded),
-              label: Text('Next'),
-              style: ElevatedButton.styleFrom(
-                primary: buttonColor,
-                onPrimary: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                ],
               ),
-            ),
-          ],
+              SizedBox(height: height * 0.10889),
+              TextButton.icon(
+                onPressed: () {
+                  Provider.of<UserData>(context, listen: false)
+                      .addRecentPeriodDate(_recentPeriodDate);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return HomePage();
+                  }));
+                },
+                icon: const Icon(Icons.arrow_forward_ios_rounded),
+                label: const Text('Next'),
+                style: ElevatedButton.styleFrom(
+                  primary: buttonColor,
+                  onPrimary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.25, vertical: height * 0.02418),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

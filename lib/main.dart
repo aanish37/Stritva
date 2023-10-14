@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stritva/model/user_data.dart';
-import 'package:stritva/view/home_page.dart';
 import 'package:stritva/view/splash_screen.dart';
 import './constant.dart';
 import './model/note_data.dart';
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
             fontFamily: 'Ubuntu',
             textTheme: const TextTheme(
@@ -39,11 +39,9 @@ class MyApp extends StatelessWidget {
               ),
               titleMedium: TextStyle(
                 fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.bold,
               ),
               titleSmall: TextStyle(
                 fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.bold,
               ),
             ),
             scaffoldBackgroundColor: backgroundColor,

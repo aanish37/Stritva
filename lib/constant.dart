@@ -4,9 +4,6 @@ import './view/dashboard_page.dart';
 import './view/info_page.dart';
 import './view/profile_page.dart';
 
-
-
-
 const backgroundColor = Color.fromARGB(255, 249, 230, 236);
 // var buttonColor = Color.fromARGB(255, 245, 0, 163);
 var buttonColor = Colors.pinkAccent[400];
@@ -24,13 +21,11 @@ List<String> emojis = ['😄', '😢', '😠', '❤️', '👍'];
 
 //FIREBASE
 
-
-
 final pages = [
   DashboardPage(),
-  CalendarPage(),
-  InfoPage(),
-  ProfilePage(),
+  const CalendarPage(),
+  const InfoPage(),
+  const ProfilePage(),
 ];
 Map<String, Map<String, List<String>>> menstrualGuidelines = {
   'Disposable  Pad': {

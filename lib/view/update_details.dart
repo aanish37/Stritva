@@ -12,8 +12,8 @@ class EditPeriodInfoScreen extends StatefulWidget {
 }
 
 class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
-  TextEditingController _cycleLengthController = TextEditingController();
-  TextEditingController _periodLengthController = TextEditingController();
+  final TextEditingController _cycleLengthController = TextEditingController();
+  final TextEditingController _periodLengthController = TextEditingController();
 
   @override
   void initState() {
@@ -30,10 +30,11 @@ class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != _recentPeriodDate)
+    if (picked != null && picked != _recentPeriodDate) {
       setState(() {
         _recentPeriodDate = picked;
       });
+    }
   }
 
   @override
@@ -45,10 +46,10 @@ class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
-        title: Text("Edit Period Info"),
+        title: const Text("Edit Period Info"),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.save,
             ),
             onPressed: () {
@@ -87,7 +88,7 @@ class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
                 labelText: "Cycle Length (days)",
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
@@ -96,7 +97,7 @@ class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
                     controller: TextEditingController(
                         text: "${_recentPeriodDate.toLocal()}".split(' ')[0]),
                     keyboardType: TextInputType.datetime,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Recent Period Date",
                     ),
                   ),
@@ -110,11 +111,11 @@ class _EditPeriodInfoScreenState extends State<EditPeriodInfoScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextFormField(
               controller: _periodLengthController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Period Length (days)",
               ),
             ),

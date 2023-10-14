@@ -9,9 +9,9 @@ class ComingSoon extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
-        title: Text('Coming Soon'),
+        title: const Text('Coming Soon'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Coming Soon',
           style: TextStyle(fontSize: 30),

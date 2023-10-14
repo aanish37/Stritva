@@ -14,7 +14,7 @@ class User {
         'username': username,
         'email': email,
         'cycleLength':cycleLength,
-        'recentPeriodDate':recentPeriodDate,
+        'recentPeriodDate':recentPeriodDate.toIso8601String(),
         'periodLength':periodLength,
       };
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stritva/constant.dart';
-import 'package:stritva/model/logic.dart';
 import 'package:stritva/model/user_data.dart';
 import './cycleLength.dart';
 
@@ -9,27 +8,34 @@ class UserName extends StatelessWidget {
   TextEditingController userNmaeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
+  UserName({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    final heightTotal = size.height;
+    final height = heightTotal - heightTotal * 0.2;
+    final width = size.width;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 90,
-            ),
-            Container(
-              child: Image.asset('asset/images/third_girl.jpg'),
+            Image.asset(
+              'asset/images/third_girl.jpg',
+              height: height * 0.68,
             ),
             Text(
               'What should we call you?',
               style: TextStyle(color: buttonColor, fontSize: 25),
             ),
-            const SizedBox(height: 20),
-            Container(
-              width: 300,
+            SizedBox(height: height * 0.0375),
+            SizedBox(
+              width: width * 0.9375,
               child: TextField(
+                style: const TextStyle(fontWeight: FontWeight.w400),
                 controller: userNmaeController,
                 decoration: const InputDecoration(
                   hintText: 'Username',
@@ -46,11 +52,12 @@ class UserName extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            Container(
-              width: 300,
+            SizedBox(height: height * 0.0375),
+            SizedBox(
+              width: width * 0.9375,
               child: TextField(
                 controller: emailController,
+                style: const TextStyle(fontWeight: FontWeight.w400),
                 decoration: const InputDecoration(
                   hintText: 'Email',
                   hintStyle: TextStyle(
@@ -66,22 +73,20 @@ class UserName extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 70,
+            SizedBox(
+              height: height * 0.14025,
             ),
             TextButton.icon(
               onPressed: () {
                 if (userNmaeController.text.isNotEmpty &&
                     emailController.text.isNotEmpty) {
+                  Provider.of<UserData>(context, listen: false).addNameEmail(
+                      userNmaeController.text, emailController.text);
 
-
-                  Provider.of<UserData>(context, listen: false)
-                      .addNameEmail(userNmaeController.text, emailController.text);
-                 ;
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) {
-                      return CycleLength();
+                      return const CycleLength();
                     }),
                   );
                 } else {
@@ -112,8 +117,8 @@ class UserName extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.25, vertical: height * 0.02418),
               ),
             ),
           ],
