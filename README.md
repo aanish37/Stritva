@@ -37,14 +37,7 @@ Yubraj Adhikari
 The step by step guide to use the App is shown below:
 
 ### These are the welcome pages
-<img src="Images/1.jpg" alt="Welcome Page 1" width="300" height="533">
-<img src="Images/2.jpg" alt="Welcome Page 2" width="300" height="533">
-<img src="Images/3.jpg" alt="Welcome Page 3" width="300" height="533">
-<img src="Images/4.jpg" alt="Welcome Page 4" width="300" height="533">
-<img src="Images/5.jpg" alt="Welcome Page 5" width="300" height="533">
-<img src="Images/6.jpg" alt="Welcome Page 6" width="300" height="533">
-<img src="Images/7.jpg" alt="Welcome Page 7" width="300" height="533">
-<img src="Images/8.jpg" alt="Welcome Page 8" width="300" height="533">
+<img src="Images/1.jpg" alt="Welcome Page 1" width="300" height="533"> <img src="Images/2.jpg" alt="Welcome Page 2" width="300" height="533"><img src="Images/3.jpg" alt="Welcome Page 3" width="300" height="533"><img src="Images/4.jpg" alt="Welcome Page 4" width="300" height="533"><img src="Images/5.jpg" alt="Welcome Page 5" width="300" height="533"><img src="Images/6.jpg" alt="Welcome Page 6" width="300" height="533"><img src="Images/7.jpg" alt="Welcome Page 7" width="300" height="533"><img src="Images/8.jpg" alt="Welcome Page 8" width="300" height="533">
 
  Finally,
 
