@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:stritva/view/home_page.dart';
 import '../../model/user_data.dart';
 
-
 class GetPresentDate extends StatefulWidget {
   const GetPresentDate({super.key});
 
@@ -39,14 +38,13 @@ class _GetPresentDate extends State<GetPresentDate> {
     final size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
-    
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(height * 0.019),
+          padding: EdgeInsets.all(height * 0.0019),
           child: Column(
             children: [
-              SizedBox(height: height * 0.019),
               Container(
                 margin: EdgeInsets.only(
                   bottom: height * 0.0241,
@@ -58,9 +56,12 @@ class _GetPresentDate extends State<GetPresentDate> {
                   height: height * 0.4839,
                 ),
               ),
-              const Text(
+              Text(
                 'Select your recent period date..',
-                style: TextStyle(color: borderColor, fontSize: 28),
+                style: TextStyle(
+                  color: buttonColor,
+                  fontSize: width * 0.0765,
+                ),
               ),
               SizedBox(height: height * 0.0241),
               Row(
@@ -85,7 +86,7 @@ class _GetPresentDate extends State<GetPresentDate> {
                   ),
                 ],
               ),
-              SizedBox(height: height * 0.10889),
+              SizedBox(height: height * 0.14889),
               TextButton.icon(
                 onPressed: () {
                   Provider.of<UserData>(context, listen: false)

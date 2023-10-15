@@ -51,9 +51,9 @@ class _PeriodLength extends State<PeriodLength> {
               'asset/images/flow_length.png',
               height: height * 0.60466,
             ),
-            const Text(
+            Text(
               'Blood Flow Length?',
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(color: buttonColor, fontSize: width * 0.0766),
             ),
             SizedBox(
               height: height * 0.0755835,
@@ -109,7 +109,8 @@ class PeriodLengthPickerDialog extends StatefulWidget {
   final ValueChanged<int> onChanged;
   final VoidCallback onSaved;
 
-  const PeriodLengthPickerDialog({super.key, 
+  const PeriodLengthPickerDialog({
+    super.key,
     required this.initialPeriodLength,
     required this.onChanged,
     required this.onSaved,
@@ -183,7 +184,8 @@ class _PeriodLengthPickerDialogState extends State<PeriodLengthPickerDialog> {
 class PeriodLengthValueText extends StatefulWidget {
   late int periodLength;
 
-  PeriodLengthValueText({super.key, 
+  PeriodLengthValueText({
+    super.key,
     required this.periodLength,
   });
 
@@ -215,9 +217,9 @@ class _PeriodLengthValueTextState extends State<PeriodLengthValueText> {
   Widget build(BuildContext context) {
     return Text(
       '$periodLength',
-      style: const TextStyle(
-        fontSize: 30,
-        color: Colors.black,
+      style: TextStyle(
+        fontSize: 33,
+        color: buttonColor,
       ),
     );
   }

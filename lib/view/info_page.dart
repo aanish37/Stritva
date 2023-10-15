@@ -52,13 +52,13 @@ class InfoPage extends StatelessWidget {
                 height: height * 0.072,
                 width: width * 0.1528,
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: height * 0.010,
               ),
               Text(
                 title,
-                style:
-                    const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w500),
               )
             ],
           ),

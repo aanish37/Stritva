@@ -21,7 +21,7 @@ class DashboardPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
-   
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -40,7 +40,7 @@ class DashboardPage extends StatelessWidget {
               //     height: 50,
               //     width: 50,
               //     child: Image.asset('asset/images/namaskar.png')),
-              const SizedBox(width: 15),
+              SizedBox(width: width * 0.03826),
               Text(
                 userName,
                 style: const TextStyle(
@@ -104,10 +104,7 @@ class DashboardPage extends StatelessWidget {
                     size),
                 todayDetails(
                   'Pregnancy',
-                  '${calculateMenstrualPhase(DateTime.now(), periodLength,
-                              cycleLength, recentPeriodDate)
-                          .values
-                          .elementAt(1)} chance',
+                  '${calculateMenstrualPhase(DateTime.now(), periodLength, cycleLength, recentPeriodDate).values.elementAt(1)} chance',
                   size,
                 )
               ],
@@ -239,9 +236,11 @@ class DashboardPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(name,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
+                  style: TextStyle(
+                      fontSize: width * 0.04591, fontWeight: FontWeight.w400)),
               Text(data,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                      fontSize: width * 0.051, fontWeight: FontWeight.bold)),
               const Text(
                 'Know your Period days better',
                 style: TextStyle(fontWeight: FontWeight.w300),

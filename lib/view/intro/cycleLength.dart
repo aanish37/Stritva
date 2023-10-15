@@ -54,9 +54,9 @@ class _CycleLength extends State<CycleLength> {
               'asset/images/period_cycle.png',
               height: height * 0.55,
             ),
-            const Text(
+            Text(
               'Menstrual Cycle Length?',
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: width * 0.0765, color: buttonColor),
             ),
             SizedBox(
               height: height * 0.0555835,

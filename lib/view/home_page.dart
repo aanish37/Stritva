@@ -16,8 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Future<void> getBool() async {
-    SharedPreferences prefs =
-        await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('seen', false);
   }
 
@@ -33,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     setBool();
 
-    // getBool();
+    getBool();
   }
 
   int _index = 0;
@@ -81,7 +80,6 @@ class _HomePageState extends State<HomePage> {
           buttonTheme: ButtonThemeData(buttonColor: buttonColor)),
       home: Scaffold(
           resizeToAvoidBottomInset: false,
-          
           backgroundColor: backgroundColor,
           appBar: AppBar(
             backgroundColor: backgroundColor,
