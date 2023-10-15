@@ -1,5 +1,5 @@
 # <center>Stritva - Celebrating Womenhood🥳</center>
-![Alt text](Stritva.png)
+![Alt text](Images/Stritva.png)
 
 Stritiva is your ultimate menstrual health companion, offering a seamless and intuitive mobile experience for tracking your menstrual cycle, providing valuable educational resources on menstruation, and enabling you to document your personal insights.
 
