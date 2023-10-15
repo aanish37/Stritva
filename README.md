@@ -37,20 +37,20 @@ Yubraj Adhikari
 The step by step guide to use the App is shown below:
 
 ### These are the welcome pages
-![Alt text](Images/1.jpg)
-![Alt text](Images/2.jpg) 
-![Alt text](Images/3.jpg) 
-![Alt text](Images/4.jpg) 
-![Alt text](Images/5.jpg) 
-![Alt text](Images/6.jpg) 
-![Alt text](Images/7.jpg)
- ![Alt text](Images/8.jpg)
+<img src="Images/1.jpg" alt="Welcome Page 1" width="300" height="533">
+<img src="Images/2.jpg" alt="Welcome Page 2" width="300" height="533">
+<img src="Images/3.jpg" alt="Welcome Page 3" width="300" height="533">
+<img src="Images/4.jpg" alt="Welcome Page 4" width="300" height="533">
+<img src="Images/5.jpg" alt="Welcome Page 5" width="300" height="533">
+<img src="Images/6.jpg" alt="Welcome Page 6" width="300" height="533">
+<img src="Images/7.jpg" alt="Welcome Page 7" width="300" height="533">
+<img src="Images/8.jpg" alt="Welcome Page 8" width="300" height="533">
 
  Finally,
 
  ## Homepage
 The Stritiva Homepage offers users a comprehensive overview of essential information. It prominently displays the local time and date, along with key details related to your menstrual cycle, such as cycle length and period duration. This feature provides a quick and convenient way to stay informed about your menstrual health.
-![Alt text](Images/Screenshot_1697088585%201.png)
+<img src="Images/Screenshot_1697088585%201.png" alt="Homepage" width="500">
 
 ## Profile Page
 The Profile Page offers a centralized hub for users to manage their personal details and access detailed reports about their menstrual cycles. It serves as a dynamic repository of critical information. Additionally, users can configure their profiles and data via the Settings, ensuring that the app adapts to their evolving needs and preferences.
