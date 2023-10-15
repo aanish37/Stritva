@@ -32,6 +32,7 @@ Stritiva was developed using cutting-edge tools and technologies, including:
 ## 🧑‍🤝‍🧑Contributors
 Anish Adhikari
 Yubraj Adhikari
+Abhishek Ray
 
 ## 🤔How to Use the App
 The step by step guide to use the App is shown below:
