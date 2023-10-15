@@ -26,7 +26,6 @@ We are committed to further enhancing Stritiva with upcoming features, such as:
 Stritiva was developed using cutting-edge tools and technologies, including:
 
 - Flutter (Mobile App Development)
-- Firebase
 - Figma (UI/UX Design)
 
 ## 🧑‍🤝‍🧑Contributors
