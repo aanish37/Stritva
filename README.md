@@ -50,30 +50,33 @@ The step by step guide to use the App is shown below:
 
  ## Homepage
 The Stritiva Homepage offers users a comprehensive overview of essential information. It prominently displays the local time and date, along with key details related to your menstrual cycle, such as cycle length and period duration. This feature provides a quick and convenient way to stay informed about your menstrual health.
-<img src="Images/Screenshot_1697088585%201.png" alt="Homepage" width="500">
+<img src="Images/Screenshot_1697088585%201.png" alt="Homepage" width="300">
 
 ## Profile Page
 The Profile Page offers a centralized hub for users to manage their personal details and access detailed reports about their menstrual cycles. It serves as a dynamic repository of critical information. Additionally, users can configure their profiles and data via the Settings, ensuring that the app adapts to their evolving needs and preferences.
-![Alt text](Images/Screenshot_1697088616%201.png)
+<img src="Images/Screenshot_1697088616%201.png" alt="Profile Page" width="300">
 
 ## Calendar Section
 Within the Calendar Section, users can access a visual representation of their menstrual cycle, highlighting the specific days of menstruation for the current month. This valuable tool empowers users to plan various activities, including vacations, hikes, and physically intensive endeavors, with greater precision and confidence.
-![Alt text](Images/Screenshot_1697088589%201.png)
-![Alt text](Images/Screenshot_1697088592%201.png)
+<img src="Images/Screenshot_1697088589%201.png" alt="Calendar Section 1" width="300">
+<img src="Images/Screenshot_1697088592%201.png" alt="Calendar Section 2" width="300">
+
 
 ## Add Notes
 The Add Notes feature enables users to record important details and personal notes for specific dates on the calendar. This functionality serves as a valuable digital diary, allowing users to document noteworthy events, thoughts, or experiences. These entries can be later revisited, fostering self-reflection and insights over time.
-![Alt text](Images/Screenshot_1697088595%201.png)
+<img src="Images/Screenshot_1697088595%201.png" alt="Add Notes" width="300">
+
 
 ## Choose Emotions
 Users have the ability to select and document their emotional state from a range of options, including Happy, Sad, Angry, Love, and Good. This feature provides a nuanced perspective on how emotions may fluctuate throughout the menstrual cycle, allowing for a deeper understanding of one's emotional well-being.
-![Alt text](Images/Screenshot_1697088601%201.png)
+<img src="Images/Screenshot_1697088601%201.png" alt="Choose Emotions" width="300">
+
 
 ## Info Page
 The Info Page is a dedicated section where users can access informative guides related to menstrual hygiene, including detailed guidance on using pads and menstrual cloths. Moreover, when users click on each section, they can delve into comprehensive information that allows them to gain an in-depth understanding of the content.
-![Alt text](Images/Screenshot_1697088607%201.png)
+<img src="Images/Screenshot_1697088607%201.png" alt="Info Page 1" width="300">
 
 Additionally, this section provides insights into the color code associated with menstrual blood, helping users differentiate and interpret the various hues they may encounter during their menstrual cycle. By demystifying common myths and delivering factual information, the Info Page empowers users with a rich source of knowledge, enabling them to make informed decisions about their menstrual health and hygiene.
-![Alt text](Images/Screenshot_1697088610%201.png)
+<img src="Images/Screenshot_1697088610%201.png" alt="Info Page 2" width="300">
 
 # Stritva for Celebrating Womenhood
