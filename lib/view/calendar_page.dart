@@ -104,7 +104,6 @@ class _CalendarPageState extends State<CalendarPage> {
 
                             noteController.clear();
                           }
-                          ;
                           Navigator.of(context).pop();
                         },
                         child: const Text('save')),

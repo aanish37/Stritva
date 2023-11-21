@@ -1,6 +1,8 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:stritva/constant.dart';
 
+// ignore: must_be_immutable
 class ShowDetails extends StatelessWidget {
   String title;
   String image;

@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundColor,
             primarySwatch: Colors.pink,
             buttonTheme: ButtonThemeData(buttonColor: buttonColor)),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

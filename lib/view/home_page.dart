@@ -8,22 +8,18 @@ import 'coming_soon.dart';
 class HomePage extends StatefulWidget {
   static String id = 'HomePage';
 
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<void> getBool() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('seen', false);
-  }
-
   Future<void> setBool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('seen', true);
 
+    // ignore: use_build_context_synchronously
     Provider.of<UserData>(context, listen: false).getUserFromPrefs();
   }
 
@@ -31,8 +27,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     setBool();
-
-    getBool();
   }
 
   int _index = 0;
@@ -104,7 +98,7 @@ class _HomePageState extends State<HomePage> {
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 10),
-                child: Container(
+                child: SizedBox(
                   height: 30,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),

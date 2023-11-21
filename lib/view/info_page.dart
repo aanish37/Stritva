@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:stritva/view/showDetails.dart';
 import 'color_showing.dart';
 
@@ -57,8 +56,10 @@ class InfoPage extends StatelessWidget {
               ),
               Text(
                 title,
-                style: const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: height * 0.017),
               )
             ],
           ),

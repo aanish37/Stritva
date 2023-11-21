@@ -1,12 +1,5 @@
-
-
-
-
-
-
-
-
-Map<String, String> calculateMenstrualPhase(DateTime date,int periodLength,int cycleLength,DateTime periodStartDate) {
+Map<String, String> calculateMenstrualPhase(DateTime date, int periodLength,
+    int cycleLength, DateTime periodStartDate) {
   // Calculate the day within the cycle
   int dayInCycle = date.difference(periodStartDate).inDays + 1;
 
@@ -19,9 +12,9 @@ Map<String, String> calculateMenstrualPhase(DateTime date,int periodLength,int c
   // Determine the phase based on the day in the cycle
   String phase;
   if (dayInCycle <= periodLength) {
-    phase = "Menstruation Phase";
+    phase = "Menstruation";
   } else if (dayInCycle <= cycleLength) {
-    phase = "Follicular Phase";
+    phase = "Follicular";
   } else {
     int lutealPhaseDay = dayInCycle - cycleLength;
     if (lutealPhaseDay <= 5) {

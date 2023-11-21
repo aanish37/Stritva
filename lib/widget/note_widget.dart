@@ -3,17 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:stritva/constant.dart';
 
 import '../model/note_data.dart';
-import '../model/logic.dart';
 
 class NoteWidget extends StatelessWidget {
   final DateTime _focusedDay;
-  NoteWidget(this._focusedDay);
+  const NoteWidget(this._focusedDay);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<NoteData>(builder: (context, noteData, child) {
-
-
       // Ensure that data is loaded before proceeding
       if (noteData.isDataLoaded == false) {
         return const CircularProgressIndicator(); // Display a progress indicator
@@ -39,8 +36,8 @@ class NoteWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 emojiForDay.isEmpty
-                    ? Container(child: Text('No emoji available'))
-                    : Container(
+                    ? const Text('No emoji available')
+                    : SizedBox(
                         width: 130,
                         child: Card(
                           color: Colors.white,
@@ -53,15 +50,15 @@ class NoteWidget extends StatelessWidget {
                             children: [
                               Text(
                                 emojiForDay[0].emoji_name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16,
                                 ),
                               ),
-                              SizedBox(width: 15),
+                              const SizedBox(width: 15),
                               Text(
                                 emojiForDay[0].emoji,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                 ),
                               ),
@@ -69,26 +66,24 @@ class NoteWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                Container(
-                  child: Row(
-                    children: [
-                      SizedBox(width: 5),
-                      representColor(buttonColor!, 'Flow'),
-                      SizedBox(width: 8),
-                      representColor(borderColor, 'Focus'),
-                      SizedBox(width: 8),
-                      representColor(borderColorLight, 'Today'),
-                      SizedBox(width: 8),
-                    ],
-                  ),
+                Row(
+                  children: [
+                    const SizedBox(width: 5),
+                    representColor(buttonColor!, 'Flow'),
+                    const SizedBox(width: 8),
+                    representColor(borderColor, 'Focus'),
+                    const SizedBox(width: 8),
+                    representColor(borderColorLight, 'Today'),
+                    const SizedBox(width: 8),
+                  ],
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             notesForDay.isEmpty
                 ? Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Text(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: const Text(
                       'No notes available',
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
@@ -97,7 +92,7 @@ class NoteWidget extends StatelessWidget {
                       ),
                     ),
                   )
-                : Container(
+                : SizedBox(
                     height: 400, // Set a maximum height for the notes list
                     child: ListView.builder(
                       itemCount: notesForDay.length,
@@ -118,7 +113,7 @@ class NoteWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child: ListTile(
-                            visualDensity: VisualDensity(vertical: 1),
+                            visualDensity: const VisualDensity(vertical: 1),
                             leading: CircleAvatar(
                               radius: 13,
                               backgroundColor: borderColorLight,
@@ -131,7 +126,7 @@ class NoteWidget extends StatelessWidget {
                               ),
                             ),
                             trailing: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.delete,
                                 color: borderColorLight,
                                 size: 25,
@@ -143,7 +138,7 @@ class NoteWidget extends StatelessWidget {
 
                                 // Show a snackbar
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                     content: Text('Deleted Note: '),
                                     duration: Duration(seconds: 2),
                                   ),
@@ -156,7 +151,7 @@ class NoteWidget extends StatelessWidget {
                             selectedTileColor: buttonColor,
                             title: Text(
                               notesForDay[index].note,
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             ),
                           ),
                         );
@@ -178,7 +173,7 @@ class NoteWidget extends StatelessWidget {
         ),
         Text(
           title,
-          style: TextStyle(fontSize: 10, fontFamily: 'Ubuntu'),
+          style: const TextStyle(fontSize: 10, fontFamily: 'Ubuntu'),
         ),
       ],
     );
