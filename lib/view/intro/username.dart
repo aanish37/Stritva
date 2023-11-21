@@ -4,6 +4,7 @@ import 'package:stritva/constant.dart';
 import 'package:stritva/model/user_data.dart';
 import './cycleLength.dart';
 
+// ignore: must_be_immutable
 class UserName extends StatelessWidget {
   TextEditingController userNmaeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -83,7 +84,7 @@ class UserName extends StatelessWidget {
                   Provider.of<UserData>(context, listen: false).addNameEmail(
                       userNmaeController.text, emailController.text);
 
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) {
                       return const CycleLength();

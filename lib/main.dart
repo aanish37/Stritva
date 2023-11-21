@@ -4,8 +4,11 @@ import 'package:stritva/view/splash_screen.dart';
 import './constant.dart';
 import './model/note_data.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive, overlays: []);
+
   runApp(const MyApp());
 }
 

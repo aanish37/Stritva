@@ -81,7 +81,7 @@ class _PeriodLength extends State<PeriodLength> {
               onPressed: () {
                 Provider.of<UserData>(context, listen: false)
                     .addPeriodLength(periodLength);
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                   return const GetPresentDate();
                 }));
               },

@@ -91,9 +91,9 @@ class _GetPresentDate extends State<GetPresentDate> {
                 onPressed: () {
                   Provider.of<UserData>(context, listen: false)
                       .addRecentPeriodDate(_recentPeriodDate);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                     return HomePage();
-                  }));
+                  }),);
                 },
                 icon: const Icon(Icons.arrow_forward_ios_rounded),
                 label: const Text('Next'),

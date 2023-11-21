@@ -85,7 +85,7 @@ class _CycleLength extends State<CycleLength> {
               onPressed: () {
                 Provider.of<UserData>(context, listen: false)
                     .addCycleLength(menstrualCycleLength);
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                   return PeriodLength();
                 }));
               },

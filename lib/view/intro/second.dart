@@ -33,7 +33,7 @@ class SecondPage extends StatelessWidget {
           SizedBox(height: height * 0.2372),
           TextButton.icon(
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) {
                   return UserName();
